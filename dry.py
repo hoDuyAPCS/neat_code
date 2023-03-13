@@ -34,4 +34,22 @@ from PIL import Image
 image = Image.open('image_name.JPG')
 image.show()
       
+#CONNECT TO LOCAL HOST SQL DATABASE 
+import pyodbc as odbc
 
+conn_str = 'Driver={SQL Server};Server=172.18.5.133,49172;Database=FindMe;Uid=user;Pwd=password;'
+#port : 49172
+#wifi host : 172.18.5.133
+
+test_conn = odbc.connect(conn_str)
+print (test_conn)
+
+cursor = test_conn.cursor()
+cursor.execute('SELECT * FROM Album')
+results = cursor.fetchall()
+
+for row in results:
+    print(row)
+
+cursor.close()
+test_conn.close()
