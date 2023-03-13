@@ -2,18 +2,21 @@
 import requests
 from bs4 import BeautifulSoup
 
-url = 'https://vnexpress.net/nhung-co-gai-nghien-chay-bo-4578025.html'
+url = 'https://tienphong.vn/gia-xang-dau-du-bao-tang-nhe-vao-chieu-nay-post1517041.tpo'
 response = requests.get(url) # Send an HTTP request to the URL and get the response
 soup = BeautifulSoup(response.content, "html.parser") # Use BeautifulSoup to parse the HTML content of the webpage
 img_tags = soup.find_all("img") # Find all image tags on the webpage
 
 regex1 = '(\w+)(\.\w+)+(?!.*(\w+)(\.\w+)+)' #get all file name in url
-regex2 = '(\w+)(\.JPG)' #get only JPG file name
+regex2 = '(\w+)(\.(JPG|jpg))' #get only JPG file name
 
 for img in img_tags:
     img_url = img.get("src")
-    print(img_url)
-    find_image_to_download = re.search(regex2, img_url)
+    print('url:',img_url)
+    try:
+      find_image_to_download = re.search(regex2, img_url)
+    except:
+      find_image_to_download = False
     
     if find_image_to_download:
       download_image = requests.get(img_url)
