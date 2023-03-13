@@ -1,6 +1,7 @@
 #DOWNLOAD JPG IMAGES FROM A WEBSITE - USING BEAUTIFULSOUP 
 import requests
 from bs4 import BeautifulSoup
+import re #regular expression
 
 url = 'https://tienphong.vn/gia-xang-dau-du-bao-tang-nhe-vao-chieu-nay-post1517041.tpo'
 response = requests.get(url) # Send an HTTP request to the URL and get the response
